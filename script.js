@@ -16,26 +16,25 @@ const questions = [
         answer:"English"
     },
     {
-        text:"who was Nigeria's first president",
-        options: ["Olusegun Obasenjo","Muhammed Buhari","Alex Shanikan","Nnamdi Azikiwe","Aguiyi ironsi"],
+        text:"Who was Nigeria's first president",
+        options: ["Olusegun Obasenjo","Muhammed Buhari","Alex Shanikan","Nnamdi Azikiwe","Aguiyi Ironsi"],
         answer:"Nnamdi Azikiwe"
     },
     {
-        text:"Nigeria is divided into how states",
+        text:"Nigeria is divided into how many states",
         options: ["36","39","40","37","38"],
         answer:"36"
     },
     {
-        text:"Nigeria gain independence from British rule in what year?",
+        text:"Nigeria gained independence from British rule in what year?",
         options: ["1960","1980","1990","1920","1992"],
         answer:"1960"
     },
     {
-        text:"Which Nigeria's city is known as the city of Aquatic Splendour",
+        text:"Which Nigerian city is known as the city of Aquatic Splendour",
         options: ["Lagos","Benue","Kaduna","Ibadan","Yobe"],
         answer:"Lagos"
     },
-
 ];
 
 let currentQuestionIndex = 0;
@@ -79,13 +78,30 @@ function nextQuestion() {
         document.getElementById('options').innerHTML = '';
         document.getElementById('result').innerText = `Quiz finished! Your score is ${score}/${questions.length}`;
         document.getElementById('next-button').style.display = 'none';
+        document.getElementById('restart-button').classList.remove('hidden');
     }
 }
 
 document.getElementById('next-button').addEventListener('click', nextQuestion);
 
-// Initialize the first question
-loadQuestion();
+function startQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById('start-button').classList.add('hidden');
+    document.getElementById('quiz-content').classList.remove('hidden');
+    document.getElementById('next-button').style.display = 'block';
+    document.getElementById('next-button').disabled = true;
+    document.getElementById('restart-button').classList.add('hidden');
+    document.getElementById('result').innerText = '';
+    loadQuestion();
+}
+
+function restartQuiz() {
+    startQuiz();
+}
+
+document.getElementById('start-button').addEventListener('click', startQuiz);
+document.getElementById('restart-button').addEventListener('click', restartQuiz);
 
  
 
